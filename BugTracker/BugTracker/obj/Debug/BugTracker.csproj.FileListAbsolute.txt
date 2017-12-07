@@ -1,0 +1,10 @@
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\BugTracker.exe.config
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\BugTracker.exe
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\BugTracker.pdb
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.csprojResolveAssemblyReference.cache
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.Form1.resources
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.Properties.Resources.resources
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.GenerateResource.Cache
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CoreCompileInputs.cache
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.exe
+C:\Users\Joe\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
