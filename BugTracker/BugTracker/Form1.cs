@@ -19,7 +19,6 @@ namespace BugTracker
         {
             InitializeComponent();
 
-            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Joe\Documents\bugDatabase.mdf;Integrated Security=True;Connect Timeout=30");
 
 
         }
