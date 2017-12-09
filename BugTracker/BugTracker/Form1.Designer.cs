@@ -31,10 +31,22 @@
             System.Windows.Forms.TabControl tabControl1;
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.sourceInput = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.errorInput = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.classInput = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.methodInput = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.projectInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.authorInput = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.addBtn = new System.Windows.Forms.Button();
+            this.lbBugs = new System.Windows.Forms.ListBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -47,7 +59,7 @@
             tabControl1.Location = new System.Drawing.Point(2, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(537, 401);
+            tabControl1.Size = new System.Drawing.Size(400, 401);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -56,51 +68,116 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(529, 375);
+            this.tabPage1.Size = new System.Drawing.Size(392, 375);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bugs";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lbBugs);
+            this.tabPage2.Controls.Add(this.addBtn);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.sourceInput);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.errorInput);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.classInput);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.methodInput);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.projectInput);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.authorInput);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(529, 375);
+            this.tabPage2.Size = new System.Drawing.Size(392, 375);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // button1
+            // label7
             // 
-            this.button1.Location = new System.Drawing.Point(185, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 51);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(63, 216);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Source File";
             // 
-            // textBox1
+            // sourceInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(201, 118);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.sourceInput.Location = new System.Drawing.Point(20, 232);
+            this.sourceInput.Name = "sourceInput";
+            this.sourceInput.Size = new System.Drawing.Size(144, 20);
+            this.sourceInput.TabIndex = 12;
             // 
-            // label1
+            // label6
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(234, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(63, 256);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Error Line";
+            // 
+            // errorInput
+            // 
+            this.errorInput.Location = new System.Drawing.Point(20, 272);
+            this.errorInput.Name = "errorInput";
+            this.errorInput.Size = new System.Drawing.Size(144, 20);
+            this.errorInput.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(77, 177);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Class";
+            // 
+            // classInput
+            // 
+            this.classInput.Location = new System.Drawing.Point(20, 193);
+            this.classInput.Name = "classInput";
+            this.classInput.Size = new System.Drawing.Size(144, 20);
+            this.classInput.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(71, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Method";
+            // 
+            // methodInput
+            // 
+            this.methodInput.Location = new System.Drawing.Point(20, 154);
+            this.methodInput.Name = "methodInput";
+            this.methodInput.Size = new System.Drawing.Size(144, 20);
+            this.methodInput.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(71, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Project";
+            // 
+            // projectInput
+            // 
+            this.projectInput.Location = new System.Drawing.Point(20, 115);
+            this.projectInput.Name = "projectInput";
+            this.projectInput.Size = new System.Drawing.Size(144, 20);
+            this.projectInput.TabIndex = 4;
             // 
             // label2
             // 
@@ -111,11 +188,53 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "label2";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(71, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Author";
+            // 
+            // authorInput
+            // 
+            this.authorInput.Location = new System.Drawing.Point(20, 76);
+            this.authorInput.Name = "authorInput";
+            this.authorInput.Size = new System.Drawing.Size(144, 20);
+            this.authorInput.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(20, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 51);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // addBtn
+            // 
+            this.addBtn.Location = new System.Drawing.Point(48, 298);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.TabIndex = 14;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            // 
+            // lbBugs
+            // 
+            this.lbBugs.FormattingEnabled = true;
+            this.lbBugs.Location = new System.Drawing.Point(193, 60);
+            this.lbBugs.Name = "lbBugs";
+            this.lbBugs.Size = new System.Drawing.Size(167, 225);
+            this.lbBugs.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 414);
+            this.ClientSize = new System.Drawing.Size(403, 406);
             this.Controls.Add(tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -132,8 +251,20 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox authorInput;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox sourceInput;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox errorInput;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox classInput;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox methodInput;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox projectInput;
+        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.ListBox lbBugs;
     }
 }
 
