@@ -18,24 +18,24 @@ namespace BugTracker
             InitializeComponent();
             populateListBox();
 
-            int i = 0;
+            //int i = 0;
 
-            while (mySqlDataReader.Read()){
-                Console.WriteLine(mySqlDataReader["author"]);
+            //while (mySqlDataReader.Read()){
+              //  Console.WriteLine(mySqlDataReader["author"]);
 
-                Data[i++] = (String)mySqlDataReader["author"];
-            }
+                //Data[i++] = (String)mySqlDataReader["author"];
+            //}
 
-            for (int j=0; j<i; j++)
-            {
-                Console.WriteLine("***" + Data[j] + "***");
-            }
+            //for (int j=0; j<i; j++)
+            //{
+              //  Console.WriteLine("***" + Data[j] + "***");
+            //}
 
         }
 
         public void populateListBox()
         {
-            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;Connect Timeout=30");
+            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
 
             String selcmd = "SELECT * FROM bugReport ";
 
@@ -90,7 +90,7 @@ namespace BugTracker
             return (rtnvalue);
         }
 
-        public void insertRecord(String author, String project, String method, String Class, String source_file, String error_line)
+        public void insertRecord(String author, String project, String method, String Class, String source_file, String error_line, String commandString)
         {
             try
             {
@@ -98,16 +98,36 @@ namespace BugTracker
 
                 bugInsert.Parameters.AddWithValue("@author", author);
                 bugInsert.Parameters.AddWithValue("@project", project);
-                bugInsert.Parameters.AddWithValue("@author", author);
-                bugInsert.Parameters.AddWithValue("@author", author);
-                bugInsert.Parameters.AddWithValue("@author", author);
+                bugInsert.Parameters.AddWithValue("@method", method);
+                bugInsert.Parameters.AddWithValue("@Class", Class);
+                bugInsert.Parameters.AddWithValue("@source_file", source_file);
+                bugInsert.Parameters.AddWithValue("@error_line", error_line);
+                bugInsert.ExecuteNonQuery();
 
+            }
+
+            catch (SqlException ex)
+            {
+                MessageBox.Show("id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            if (checkInputs())
+            {
+                String commandString = "INSERT INTO bugReport(author, project, method, Class, source_file, error_line) VALUES (@author, @project, @method, @Class, @source_file, @error_line)";
+
+                insertRecord(authorInput.Text, projectInput.Text, methodInput.Text, classInput.Text, sourceInput.Text, errorInput.Text, commandString);
+
+                populateListBox();
+                cleartxtBoxes();
+            }
         }
     }
 }

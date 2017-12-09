@@ -41,7 +41,6 @@
             this.methodInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.projectInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.authorInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -54,12 +53,15 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             tabControl1.Controls.Add(this.tabPage1);
             tabControl1.Controls.Add(this.tabPage2);
             tabControl1.Location = new System.Drawing.Point(2, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(400, 401);
+            tabControl1.Size = new System.Drawing.Size(719, 351);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -87,14 +89,13 @@
             this.tabPage2.Controls.Add(this.methodInput);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.projectInput);
-            this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.authorInput);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(392, 375);
+            this.tabPage2.Size = new System.Drawing.Size(711, 325);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -179,15 +180,6 @@
             this.projectInput.Size = new System.Drawing.Size(144, 20);
             this.projectInput.TabIndex = 4;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -221,20 +213,23 @@
             this.addBtn.TabIndex = 14;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // lbBugs
             // 
+            this.lbBugs.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbBugs.FormattingEnabled = true;
-            this.lbBugs.Location = new System.Drawing.Point(193, 60);
+            this.lbBugs.ItemHeight = 18;
+            this.lbBugs.Location = new System.Drawing.Point(193, 67);
             this.lbBugs.Name = "lbBugs";
-            this.lbBugs.Size = new System.Drawing.Size(167, 225);
+            this.lbBugs.Size = new System.Drawing.Size(511, 220);
             this.lbBugs.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 406);
+            this.ClientSize = new System.Drawing.Size(722, 356);
             this.Controls.Add(tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -249,7 +244,6 @@
         #endregion
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox authorInput;
         private System.Windows.Forms.Button button1;
