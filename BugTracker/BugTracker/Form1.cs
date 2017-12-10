@@ -9,31 +9,41 @@ namespace BugTracker
 {
     public partial class Form1 : Form
     {
-        SqlConnection mySqlConnection;
+
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30";
+        
+        //SqlConnection mySqlConnection;
+        SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+        DataTable dtbl = new DataTable();
 
         public Form1()
         {
             String[] Data = new String[100];
 
             InitializeComponent();
-            populateListBox();
-
-            //int i = 0;
-
-            //while (mySqlDataReader.Read()){
-              //  Console.WriteLine(mySqlDataReader["author"]);
-
-                //Data[i++] = (String)mySqlDataReader["author"];
-            //}
-
-            //for (int j=0; j<i; j++)
-            //{
-              //  Console.WriteLine("***" + Data[j] + "***");
-            //}
+            //populateListBox();
+            populatedataGridBug();
+            
 
         }
 
-        public void populateListBox()
+        public void populatedataGridBug()
+        {
+
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", connectionString);
+
+                
+                sqlDa.Fill(dtbl);
+
+                dataGridBug.DataSource = dtbl;
+            }
+        }
+
+        /*public void populateListBox()
         {
             mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
 
@@ -49,14 +59,15 @@ namespace BugTracker
 
                 lbBugs.Items.Clear();
 
+
                 while (mySqlDataReader.Read()){
-                    lbBugs.Items.Add(mySqlDataReader["id"] + " " +
-                        mySqlDataReader["author"] + " " +
-                        mySqlDataReader["project"] + " " +
-                        mySqlDataReader["method"] + " " +
-                        mySqlDataReader["class"] + " " +
-                        mySqlDataReader["source_file"] + " " +
-                        mySqlDataReader["error_line"] + " " +
+                    lbBugs.Items.Add(mySqlDataReader["id"] + " || " +
+                        mySqlDataReader["author"] + " || " +
+                        mySqlDataReader["project"] + " || " +
+                        mySqlDataReader["method"] + " || " +
+                        mySqlDataReader["class"] + " || " +
+                        mySqlDataReader["source_file"] + " || " +
+                        mySqlDataReader["error_line"] + " || " +
                         mySqlDataReader["date"]);
                 }
 
@@ -66,7 +77,7 @@ namespace BugTracker
                 MessageBox.Show("id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        */
         public void cleartxtBoxes()
         {
             authorInput.Text = projectInput.Text = methodInput.Text = classInput.Text = sourceInput.Text = errorInput.Text = "";
@@ -121,11 +132,18 @@ namespace BugTracker
         {
             if (checkInputs())
             {
+                SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+                mySqlConnection.Open();
+
                 String commandString = "INSERT INTO bugReport(author, project, method, Class, source_file, error_line) VALUES (@author, @project, @method, @Class, @source_file, @error_line)";
 
                 insertRecord(authorInput.Text, projectInput.Text, methodInput.Text, classInput.Text, sourceInput.Text, errorInput.Text, commandString);
 
-                populateListBox();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
+
+
+                sqlDa.Fill(dtbl);
                 cleartxtBoxes();
             }
         }

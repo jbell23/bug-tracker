@@ -31,6 +31,8 @@
             System.Windows.Forms.TabControl tabControl1;
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lbBugs = new System.Windows.Forms.ListBox();
+            this.addBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.sourceInput = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,11 +46,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.authorInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.addBtn = new System.Windows.Forms.Button();
-            this.lbBugs = new System.Windows.Forms.ListBox();
+            this.dataGridBug = new System.Windows.Forms.DataGridView();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -70,13 +72,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(392, 375);
+            this.tabPage1.Size = new System.Drawing.Size(711, 325);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bugs";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dataGridBug);
             this.tabPage2.Controls.Add(this.lbBugs);
             this.tabPage2.Controls.Add(this.addBtn);
             this.tabPage2.Controls.Add(this.label7);
@@ -99,6 +102,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lbBugs
+            // 
+            this.lbBugs.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBugs.FormattingEnabled = true;
+            this.lbBugs.ItemHeight = 18;
+            this.lbBugs.Location = new System.Drawing.Point(193, 67);
+            this.lbBugs.Name = "lbBugs";
+            this.lbBugs.Size = new System.Drawing.Size(511, 220);
+            this.lbBugs.TabIndex = 15;
+            // 
+            // addBtn
+            // 
+            this.addBtn.Location = new System.Drawing.Point(48, 298);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.TabIndex = 14;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // label7
             // 
@@ -205,25 +228,13 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // addBtn
+            // dataGridBug
             // 
-            this.addBtn.Location = new System.Drawing.Point(48, 298);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
-            this.addBtn.TabIndex = 14;
-            this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
-            // lbBugs
-            // 
-            this.lbBugs.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBugs.FormattingEnabled = true;
-            this.lbBugs.ItemHeight = 18;
-            this.lbBugs.Location = new System.Drawing.Point(193, 67);
-            this.lbBugs.Name = "lbBugs";
-            this.lbBugs.Size = new System.Drawing.Size(511, 220);
-            this.lbBugs.TabIndex = 15;
+            this.dataGridBug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBug.Location = new System.Drawing.Point(308, 115);
+            this.dataGridBug.Name = "dataGridBug";
+            this.dataGridBug.Size = new System.Drawing.Size(240, 150);
+            this.dataGridBug.TabIndex = 16;
             // 
             // Form1
             // 
@@ -237,6 +248,7 @@
             tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -259,6 +271,7 @@
         private System.Windows.Forms.TextBox projectInput;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.ListBox lbBugs;
+        private System.Windows.Forms.DataGridView dataGridBug;
     }
 }
 
