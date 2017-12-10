@@ -31,6 +31,7 @@
             System.Windows.Forms.TabControl tabControl1;
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridBug = new System.Windows.Forms.DataGridView();
             this.lbBugs = new System.Windows.Forms.ListBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.authorInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridBug = new System.Windows.Forms.DataGridView();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -102,6 +102,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridBug
+            // 
+            this.dataGridBug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBug.Location = new System.Drawing.Point(194, 28);
+            this.dataGridBug.Name = "dataGridBug";
+            this.dataGridBug.Size = new System.Drawing.Size(511, 224);
+            this.dataGridBug.TabIndex = 16;
             // 
             // lbBugs
             // 
@@ -227,14 +235,6 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridBug
-            // 
-            this.dataGridBug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridBug.Location = new System.Drawing.Point(308, 115);
-            this.dataGridBug.Name = "dataGridBug";
-            this.dataGridBug.Size = new System.Drawing.Size(240, 150);
-            this.dataGridBug.TabIndex = 16;
             // 
             // Form1
             // 

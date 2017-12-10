@@ -14,6 +14,8 @@ namespace BugTracker
         
         //SqlConnection mySqlConnection;
         SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+
         DataTable dtbl = new DataTable();
 
         public Form1()
@@ -30,13 +32,12 @@ namespace BugTracker
         public void populatedataGridBug()
         {
 
-            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            using (mySqlConnection)
             {
-                sqlCon.Open();
+                mySqlConnection.Open();
 
-                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", connectionString);
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
-                
                 sqlDa.Fill(dtbl);
 
                 dataGridBug.DataSource = dtbl;
@@ -103,24 +104,30 @@ namespace BugTracker
 
         public void insertRecord(String author, String project, String method, String Class, String source_file, String error_line, String commandString)
         {
-            try
+            using (SqlConnection myCon = new SqlConnection(connectionString))
             {
-                SqlCommand bugInsert = new SqlCommand(commandString, mySqlConnection);
+                try
+                {
+                    myCon.Open();
 
-                bugInsert.Parameters.AddWithValue("@author", author);
-                bugInsert.Parameters.AddWithValue("@project", project);
-                bugInsert.Parameters.AddWithValue("@method", method);
-                bugInsert.Parameters.AddWithValue("@Class", Class);
-                bugInsert.Parameters.AddWithValue("@source_file", source_file);
-                bugInsert.Parameters.AddWithValue("@error_line", error_line);
-                bugInsert.ExecuteNonQuery();
+                    SqlCommand bugInsert = new SqlCommand(commandString, myCon);
 
+                    bugInsert.Parameters.AddWithValue("@author", author);
+                    bugInsert.Parameters.AddWithValue("@project", project);
+                    bugInsert.Parameters.AddWithValue("@method", method);
+                    bugInsert.Parameters.AddWithValue("@Class", Class);
+                    bugInsert.Parameters.AddWithValue("@source_file", source_file);
+                    bugInsert.Parameters.AddWithValue("@error_line", error_line);
+                    bugInsert.ExecuteNonQuery();
+
+                }
+
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
-            catch (SqlException ex)
-            {
-                MessageBox.Show("id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -141,7 +148,6 @@ namespace BugTracker
                 insertRecord(authorInput.Text, projectInput.Text, methodInput.Text, classInput.Text, sourceInput.Text, errorInput.Text, commandString);
 
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
-
 
                 sqlDa.Fill(dtbl);
                 cleartxtBoxes();
