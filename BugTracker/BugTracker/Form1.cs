@@ -17,6 +17,7 @@ namespace BugTracker
 
 
         DataTable dtbl = new DataTable();
+        int ID = 0;
 
         public Form1()
         {
@@ -25,7 +26,10 @@ namespace BugTracker
             InitializeComponent();
             //populateListBox();
             populatedataGridBug();
-            
+
+            dataGridBug.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridBug_RowHeaderMouseDoubleClick);
+
+
 
         }
 
@@ -129,13 +133,16 @@ namespace BugTracker
             }
 
         }
+ 
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'bugDBDataSet.bugReport' table. You can move, or remove it, as needed.
+            this.bugReportTableAdapter.Fill(this.bugDBDataSet.bugReport);
 
         }
 
-        private void addBtn_Click(object sender, EventArgs e)
+        public void addBtn_Click(object sender, EventArgs e)
         {
             if (checkInputs())
             {
@@ -149,9 +156,54 @@ namespace BugTracker
 
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
+                dtbl.Clear();
                 sqlDa.Fill(dtbl);
                 cleartxtBoxes();
+
             }
         }
+
+        public void dataGridBug_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
+            authorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[1].Value.ToString();
+            projectInput.Text = dataGridBug.Rows[e.RowIndex].Cells[2].Value.ToString();
+            methodInput.Text = dataGridBug.Rows[e.RowIndex].Cells[3].Value.ToString();
+            classInput.Text = dataGridBug.Rows[e.RowIndex].Cells[4].Value.ToString();
+            sourceInput.Text = dataGridBug.Rows[e.RowIndex].Cells[5].Value.ToString();
+            errorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[6].Value.ToString();
+        }
+
+        public void updateBut_Click(object sender, EventArgs e)
+        {
+            if (authorInput.Text != "" && projectInput.Text != "" && methodInput.Text != "" && classInput.Text != "" && sourceInput.Text != "" && errorInput.Text != "")
+            {
+                SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+                SqlCommand upCmd = new SqlCommand("UPDATE bugReport set author=@author, project=@project, method=@method, Class=@Class, source_file=@source_file, error_line=@error_line WHERE id=@id", mySqlConnection);
+                mySqlConnection.Open();
+                upCmd.Parameters.AddWithValue("@id", ID);
+                upCmd.Parameters.AddWithValue("@author", authorInput.Text);
+                upCmd.Parameters.AddWithValue("@project", projectInput.Text);
+                upCmd.Parameters.AddWithValue("@method", methodInput.Text);
+                upCmd.Parameters.AddWithValue("@Class", classInput.Text);
+                upCmd.Parameters.AddWithValue("@source_file", sourceInput.Text);
+                upCmd.Parameters.AddWithValue("@error_line", errorInput.Text);
+                upCmd.ExecuteNonQuery();
+                MessageBox.Show("succesful");
+                mySqlConnection.Close();
+
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
+
+                dtbl.Clear();
+                sqlDa.Fill(dtbl);
+            }
+            else
+            {
+                MessageBox.Show("didnt work");
+            }
+        }
+
+
     }
 }

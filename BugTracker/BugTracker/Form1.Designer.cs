@@ -28,11 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabControl tabControl1;
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.updateBut = new System.Windows.Forms.Button();
             this.dataGridBug = new System.Windows.Forms.DataGridView();
-            this.lbBugs = new System.Windows.Forms.ListBox();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.methodDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sourcefileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.solvedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.addBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.sourceInput = new System.Windows.Forms.TextBox();
@@ -47,10 +59,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.authorInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -63,7 +78,7 @@
             tabControl1.Location = new System.Drawing.Point(2, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(719, 351);
+            tabControl1.Size = new System.Drawing.Size(719, 410);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -72,15 +87,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(711, 325);
+            this.tabPage1.Size = new System.Drawing.Size(711, 384);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bugs";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.updateBut);
             this.tabPage2.Controls.Add(this.dataGridBug);
-            this.tabPage2.Controls.Add(this.lbBugs);
             this.tabPage2.Controls.Add(this.addBtn);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.sourceInput);
@@ -98,32 +113,122 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(711, 325);
+            this.tabPage2.Size = new System.Drawing.Size(711, 384);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // updateBut
+            // 
+            this.updateBut.Location = new System.Drawing.Point(386, 293);
+            this.updateBut.Name = "updateBut";
+            this.updateBut.Size = new System.Drawing.Size(75, 23);
+            this.updateBut.TabIndex = 17;
+            this.updateBut.Text = "Update";
+            this.updateBut.UseVisualStyleBackColor = true;
+            this.updateBut.Click += new System.EventHandler(this.updateBut_Click);
+            // 
             // dataGridBug
             // 
+            this.dataGridBug.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridBug.AutoGenerateColumns = false;
+            this.dataGridBug.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridBug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBug.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.authorDataGridViewTextBoxColumn,
+            this.projectDataGridViewTextBoxColumn,
+            this.methodDataGridViewTextBoxColumn,
+            this.classDataGridViewTextBoxColumn,
+            this.sourcefileDataGridViewTextBoxColumn,
+            this.errorlineDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn,
+            this.solvedDataGridViewCheckBoxColumn});
+            this.dataGridBug.DataSource = this.bugReportBindingSource;
             this.dataGridBug.Location = new System.Drawing.Point(194, 28);
             this.dataGridBug.Name = "dataGridBug";
             this.dataGridBug.Size = new System.Drawing.Size(511, 224);
             this.dataGridBug.TabIndex = 16;
             // 
-            // lbBugs
+            // idDataGridViewTextBoxColumn
             // 
-            this.lbBugs.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBugs.FormattingEnabled = true;
-            this.lbBugs.ItemHeight = 18;
-            this.lbBugs.Location = new System.Drawing.Point(193, 67);
-            this.lbBugs.Name = "lbBugs";
-            this.lbBugs.Size = new System.Drawing.Size(511, 220);
-            this.lbBugs.TabIndex = 15;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 38;
+            // 
+            // authorDataGridViewTextBoxColumn
+            // 
+            this.authorDataGridViewTextBoxColumn.DataPropertyName = "author";
+            this.authorDataGridViewTextBoxColumn.HeaderText = "author";
+            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            this.authorDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // projectDataGridViewTextBoxColumn
+            // 
+            this.projectDataGridViewTextBoxColumn.DataPropertyName = "project";
+            this.projectDataGridViewTextBoxColumn.HeaderText = "project";
+            this.projectDataGridViewTextBoxColumn.Name = "projectDataGridViewTextBoxColumn";
+            this.projectDataGridViewTextBoxColumn.Width = 62;
+            // 
+            // methodDataGridViewTextBoxColumn
+            // 
+            this.methodDataGridViewTextBoxColumn.DataPropertyName = "method";
+            this.methodDataGridViewTextBoxColumn.HeaderText = "method";
+            this.methodDataGridViewTextBoxColumn.Name = "methodDataGridViewTextBoxColumn";
+            this.methodDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // classDataGridViewTextBoxColumn
+            // 
+            this.classDataGridViewTextBoxColumn.DataPropertyName = "class";
+            this.classDataGridViewTextBoxColumn.HeaderText = "class";
+            this.classDataGridViewTextBoxColumn.Name = "classDataGridViewTextBoxColumn";
+            this.classDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // sourcefileDataGridViewTextBoxColumn
+            // 
+            this.sourcefileDataGridViewTextBoxColumn.DataPropertyName = "source_file";
+            this.sourcefileDataGridViewTextBoxColumn.HeaderText = "source_file";
+            this.sourcefileDataGridViewTextBoxColumn.Name = "sourcefileDataGridViewTextBoxColumn";
+            this.sourcefileDataGridViewTextBoxColumn.Width = 81;
+            // 
+            // errorlineDataGridViewTextBoxColumn
+            // 
+            this.errorlineDataGridViewTextBoxColumn.DataPropertyName = "error_line";
+            this.errorlineDataGridViewTextBoxColumn.HeaderText = "error_line";
+            this.errorlineDataGridViewTextBoxColumn.Name = "errorlineDataGridViewTextBoxColumn";
+            this.errorlineDataGridViewTextBoxColumn.Width = 73;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // solvedDataGridViewCheckBoxColumn
+            // 
+            this.solvedDataGridViewCheckBoxColumn.DataPropertyName = "solved";
+            this.solvedDataGridViewCheckBoxColumn.HeaderText = "solved";
+            this.solvedDataGridViewCheckBoxColumn.Name = "solvedDataGridViewCheckBoxColumn";
+            this.solvedDataGridViewCheckBoxColumn.Width = 42;
+            // 
+            // bugReportBindingSource
+            // 
+            this.bugReportBindingSource.DataMember = "bugReport";
+            this.bugReportBindingSource.DataSource = this.bugDBDataSet;
+            // 
+            // bugDBDataSet
+            // 
+            this.bugDBDataSet.DataSetName = "bugDBDataSet";
+            this.bugDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(48, 298);
+            this.addBtn.Location = new System.Drawing.Point(48, 341);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 14;
@@ -236,11 +341,15 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // bugReportTableAdapter
+            // 
+            this.bugReportTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 356);
+            this.ClientSize = new System.Drawing.Size(722, 415);
             this.Controls.Add(tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -249,6 +358,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -270,8 +381,20 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox projectInput;
         private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.ListBox lbBugs;
         private System.Windows.Forms.DataGridView dataGridBug;
+        private System.Windows.Forms.Button updateBut;
+        private bugDBDataSet bugDBDataSet;
+        private System.Windows.Forms.BindingSource bugReportBindingSource;
+        private bugDBDataSetTableAdapters.bugReportTableAdapter bugReportTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn methodDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn classDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sourcefileDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn errorlineDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn solvedDataGridViewCheckBoxColumn;
     }
 }
 
