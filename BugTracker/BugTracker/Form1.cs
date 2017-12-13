@@ -137,8 +137,6 @@ namespace BugTracker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'bugDBDataSet.bugReport' table. You can move, or remove it, as needed.
-            this.bugReportTableAdapter.Fill(this.bugDBDataSet.bugReport);
 
         }
 
@@ -204,6 +202,9 @@ namespace BugTracker
             }
         }
 
-
+        private void clear_Click(object sender, EventArgs e)
+        {
+            cleartxtBoxes();
+        }
     }
 }

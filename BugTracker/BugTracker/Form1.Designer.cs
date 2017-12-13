@@ -32,6 +32,7 @@
             System.Windows.Forms.TabControl tabControl1;
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.clear = new System.Windows.Forms.Button();
             this.updateBut = new System.Windows.Forms.Button();
             this.dataGridBug = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +79,7 @@
             tabControl1.Location = new System.Drawing.Point(2, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(719, 410);
+            tabControl1.Size = new System.Drawing.Size(845, 402);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -87,13 +88,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(711, 384);
+            this.tabPage1.Size = new System.Drawing.Size(837, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bugs";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.clear);
             this.tabPage2.Controls.Add(this.updateBut);
             this.tabPage2.Controls.Add(this.dataGridBug);
             this.tabPage2.Controls.Add(this.addBtn);
@@ -113,14 +115,24 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(711, 384);
+            this.tabPage2.Size = new System.Drawing.Size(837, 376);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // clear
+            // 
+            this.clear.Location = new System.Drawing.Point(48, 327);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.TabIndex = 18;
+            this.clear.Text = "Clear";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
             // updateBut
             // 
-            this.updateBut.Location = new System.Drawing.Point(386, 293);
+            this.updateBut.Location = new System.Drawing.Point(447, 246);
             this.updateBut.Name = "updateBut";
             this.updateBut.Size = new System.Drawing.Size(75, 23);
             this.updateBut.TabIndex = 17;
@@ -149,7 +161,7 @@
             this.dataGridBug.DataSource = this.bugReportBindingSource;
             this.dataGridBug.Location = new System.Drawing.Point(194, 28);
             this.dataGridBug.Name = "dataGridBug";
-            this.dataGridBug.Size = new System.Drawing.Size(511, 224);
+            this.dataGridBug.Size = new System.Drawing.Size(570, 201);
             this.dataGridBug.TabIndex = 16;
             // 
             // idDataGridViewTextBoxColumn
@@ -228,7 +240,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(48, 341);
+            this.addBtn.Location = new System.Drawing.Point(48, 298);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 14;
@@ -349,7 +361,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 415);
+            this.ClientSize = new System.Drawing.Size(848, 407);
             this.Controls.Add(tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -395,6 +407,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn errorlineDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn solvedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Button clear;
     }
 }
 
