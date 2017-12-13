@@ -17,7 +17,10 @@ namespace BugTracker
 
 
         DataTable dtbl = new DataTable();
+        DataTable dtblUp = new DataTable();
+
         int ID = 0;
+        string solved;
 
         public Form1()
         {
@@ -27,10 +30,8 @@ namespace BugTracker
             //populateListBox();
             populatedataGridBug();
 
-            dataGridBug.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridBug_RowHeaderMouseDoubleClick);
-
-
-
+            //dataGridBug.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridBug_RowHeaderMouseDoubleClick);
+            dtblUpdate.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dtblUpdate_RowHeaderMouseClick);
         }
 
         public void populatedataGridBug()
@@ -43,8 +44,10 @@ namespace BugTracker
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
                 sqlDa.Fill(dtbl);
+                sqlDa.Fill(dtblUp);
 
                 dataGridBug.DataSource = dtbl;
+                dtblUpdate.DataSource = dtblUp;
             }
         }
 
@@ -161,7 +164,7 @@ namespace BugTracker
             }
         }
 
-        public void dataGridBug_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        /*public void dataGridBug_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
             authorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -170,15 +173,41 @@ namespace BugTracker
             classInput.Text = dataGridBug.Rows[e.RowIndex].Cells[4].Value.ToString();
             sourceInput.Text = dataGridBug.Rows[e.RowIndex].Cells[5].Value.ToString();
             errorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[6].Value.ToString();
+        }*/
+
+        public void dtblUpdate_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
+            authorUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[1].Value.ToString();
+            projectUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[2].Value.ToString();
+            methodUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[3].Value.ToString();
+            classUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[4].Value.ToString();
+            sourceUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[5].Value.ToString();
+            errorUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
 
         public void updateBut_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            cleartxtBoxes();
+        }
+
+        private void updateBut_Click_1(object sender, EventArgs e)
+        {
+            if (solvedUpdate.Checked == true)
+            {
+                solved = "Solved";
+            }
+
             if (authorInput.Text != "" && projectInput.Text != "" && methodInput.Text != "" && classInput.Text != "" && sourceInput.Text != "" && errorInput.Text != "")
             {
                 SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
 
-                SqlCommand upCmd = new SqlCommand("UPDATE bugReport set author=@author, project=@project, method=@method, Class=@Class, source_file=@source_file, error_line=@error_line WHERE id=@id", mySqlConnection);
+                SqlCommand upCmd = new SqlCommand("UPDATE bugReport set author=@author, project=@project, method=@method, Class=@Class, source_file=@source_file, error_line=@error_line, solved=@solved WHERE id=@id", mySqlConnection);
                 mySqlConnection.Open();
                 upCmd.Parameters.AddWithValue("@id", ID);
                 upCmd.Parameters.AddWithValue("@author", authorInput.Text);
@@ -187,6 +216,7 @@ namespace BugTracker
                 upCmd.Parameters.AddWithValue("@Class", classInput.Text);
                 upCmd.Parameters.AddWithValue("@source_file", sourceInput.Text);
                 upCmd.Parameters.AddWithValue("@error_line", errorInput.Text);
+                upCmd.Parameters.AddWithValue("@solved", solved);
                 upCmd.ExecuteNonQuery();
                 MessageBox.Show("succesful");
                 mySqlConnection.Close();
@@ -200,11 +230,6 @@ namespace BugTracker
             {
                 MessageBox.Show("didnt work");
             }
-        }
-
-        private void clear_Click(object sender, EventArgs e)
-        {
-            cleartxtBoxes();
         }
     }
 }
