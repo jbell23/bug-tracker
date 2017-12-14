@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace BugTracker
@@ -51,41 +52,6 @@ namespace BugTracker
             }
         }
 
-        /*public void populateListBox()
-        {
-            mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
-
-            String selcmd = "SELECT * FROM bugReport ";
-
-            SqlCommand mySqlCommand = new SqlCommand(selcmd, mySqlConnection);
-
-            try
-            {
-                mySqlConnection.Open();
-
-                SqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
-
-                lbBugs.Items.Clear();
-
-
-                while (mySqlDataReader.Read()){
-                    lbBugs.Items.Add(mySqlDataReader["id"] + " || " +
-                        mySqlDataReader["author"] + " || " +
-                        mySqlDataReader["project"] + " || " +
-                        mySqlDataReader["method"] + " || " +
-                        mySqlDataReader["class"] + " || " +
-                        mySqlDataReader["source_file"] + " || " +
-                        mySqlDataReader["error_line"] + " || " +
-                        mySqlDataReader["date"]);
-                }
-
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        */
         public void cleartxtBoxes()
         {
             authorInput.Text = projectInput.Text = methodInput.Text = classInput.Text = sourceInput.Text = errorInput.Text = "";
@@ -102,7 +68,7 @@ namespace BugTracker
                 string.IsNullOrEmpty(sourceInput.Text) ||
                 string.IsNullOrEmpty(errorInput.Text))
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Error - Inputs Incorrect");
                 rtnvalue = false;
             }
 
@@ -164,17 +130,6 @@ namespace BugTracker
             }
         }
 
-        /*public void dataGridBug_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
-            authorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[1].Value.ToString();
-            projectInput.Text = dataGridBug.Rows[e.RowIndex].Cells[2].Value.ToString();
-            methodInput.Text = dataGridBug.Rows[e.RowIndex].Cells[3].Value.ToString();
-            classInput.Text = dataGridBug.Rows[e.RowIndex].Cells[4].Value.ToString();
-            sourceInput.Text = dataGridBug.Rows[e.RowIndex].Cells[5].Value.ToString();
-            errorInput.Text = dataGridBug.Rows[e.RowIndex].Cells[6].Value.ToString();
-        }*/
-
         public void dtblUpdate_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
@@ -184,12 +139,106 @@ namespace BugTracker
             classUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[4].Value.ToString();
             sourceUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[5].Value.ToString();
             errorUpdate.Text = dataGridBug.Rows[e.RowIndex].Cells[6].Value.ToString();
+
+        }
+        private void dataGridBug_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tabCtrl.SelectedIndex = 3;
+
+            if (e.RowIndex >= 0)
+            {
+                int i;
+                i = dataGridBug.SelectedCells[0].RowIndex;
+
+                ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
+                codeText.Text = dataGridBug.Rows[e.RowIndex].Cells[9].Value.ToString();
+            }
+        }
+
+        public void updateRecord (String author, String project, String method, String Class, String source_file, String error_line, String solved, String commandString)
+        {
+            if (solvedUpdate.Checked)
+            {
+                solved = "Solved";
+            }
+            else
+            {
+                solved = "Un-solved";
+            }
+            using (SqlConnection myCon = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    myCon.Open();
+
+                    SqlCommand upCmd = new SqlCommand(commandString, myCon);
+
+                    upCmd.Parameters.AddWithValue("@id", ID);
+                    upCmd.Parameters.AddWithValue("@author", authorUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@project", projectUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@method", methodUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@Class", classUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@source_file", sourceUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@error_line", errorUpdate.Text);
+                    upCmd.Parameters.AddWithValue("@solved", solved);
+                    upCmd.ExecuteNonQuery();
+                    MessageBox.Show("succesful");
+
+                    myCon.Close();
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("@id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         public void updateBut_Click(object sender, EventArgs e)
         {
-            
+            if (authorUpdate.Text != "" && projectUpdate.Text != "" && methodUpdate.Text != "" && classUpdate.Text != "" && sourceUpdate.Text != "" && errorUpdate.Text != "")
+            {
+                SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+                //mySqlConnection.Open();
+
+                String commandString = "UPDATE bugReport SET author=@author, project=@project, method=@method, Class=@Class, source_file=@source_file, error_line=@error_line, solved=@solved WHERE id=@id";
+
+                updateRecord(authorUpdate.Text, projectUpdate.Text, methodUpdate.Text, classUpdate.Text, sourceUpdate.Text, errorUpdate.Text, solved, commandString);
+
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
+
+                dtblUp.Clear();
+                sqlDa.Fill(dtblUp);
+                cleartxtBoxes();
+            }
+
         }
+
+        public void updateCode (String fixer, String code, String commandString)
+        {
+            using (SqlConnection myCon = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    myCon.Open();
+
+                    SqlCommand upCmd = new SqlCommand(commandString, myCon);
+
+                    upCmd.Parameters.AddWithValue("@id", ID);
+                    upCmd.Parameters.AddWithValue("@fixer", fixerName.Text);
+                    upCmd.Parameters.AddWithValue("@code", codeText.Text);
+                    upCmd.ExecuteNonQuery();
+                    MessageBox.Show("succesful");
+
+                    myCon.Close();
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("@id" + ".." + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
 
         private void clear_Click(object sender, EventArgs e)
         {
@@ -198,37 +247,37 @@ namespace BugTracker
 
         private void updateBut_Click_1(object sender, EventArgs e)
         {
-            if (solvedUpdate.Checked == true)
-            {
-                solved = "Solved";
-            }
+           
+        }
 
-            if (authorInput.Text != "" && projectInput.Text != "" && methodInput.Text != "" && classInput.Text != "" && sourceInput.Text != "" && errorInput.Text != "")
+        private void refresh_Click(object sender, EventArgs e)
+        {
+            SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+            mySqlConnection.Open();
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
+
+            dtbl.Clear();
+            sqlDa.Fill(dtbl);
+        }
+
+        private void submitBut_Click(object sender, EventArgs e)
+        {
+            if (fixerName.Text != "" && codeText.Text != "")
             {
                 SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
 
-                SqlCommand upCmd = new SqlCommand("UPDATE bugReport set author=@author, project=@project, method=@method, Class=@Class, source_file=@source_file, error_line=@error_line, solved=@solved WHERE id=@id", mySqlConnection);
                 mySqlConnection.Open();
-                upCmd.Parameters.AddWithValue("@id", ID);
-                upCmd.Parameters.AddWithValue("@author", authorInput.Text);
-                upCmd.Parameters.AddWithValue("@project", projectInput.Text);
-                upCmd.Parameters.AddWithValue("@method", methodInput.Text);
-                upCmd.Parameters.AddWithValue("@Class", classInput.Text);
-                upCmd.Parameters.AddWithValue("@source_file", sourceInput.Text);
-                upCmd.Parameters.AddWithValue("@error_line", errorInput.Text);
-                upCmd.Parameters.AddWithValue("@solved", solved);
-                upCmd.ExecuteNonQuery();
-                MessageBox.Show("succesful");
-                mySqlConnection.Close();
+
+                String commandString = "UPDATE bugReport SET fixer=@fixer, code=@code WHERE id=@id";
+
+                updateCode(fixerName.Text, codeText.Text, commandString);
 
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
-                dtbl.Clear();
-                sqlDa.Fill(dtbl);
-            }
-            else
-            {
-                MessageBox.Show("didnt work");
+                dtblUp.Clear();
+                sqlDa.Fill(dtblUp);
+                cleartxtBoxes();
             }
         }
     }

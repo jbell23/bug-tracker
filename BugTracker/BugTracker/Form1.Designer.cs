@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TabControl tabControl1;
+            this.tabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.refresh = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
             this.dataGridBug = new System.Windows.Forms.DataGridView();
-            this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.addBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.sourceInput = new System.Windows.Forms.TextBox();
@@ -52,6 +51,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bugUpdate = new System.Windows.Forms.TabPage();
             this.solvedUpdate = new System.Windows.Forms.CheckBox();
+            this.updateBut = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.sourceUpdate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -65,31 +65,43 @@
             this.label12 = new System.Windows.Forms.Label();
             this.authorUpdate = new System.Windows.Forms.TextBox();
             this.dtblUpdate = new System.Windows.Forms.DataGridView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.submitBut = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comment = new System.Windows.Forms.TextBox();
+            this.fixerName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.histText = new System.Windows.Forms.RichTextBox();
+            this.codeText = new System.Windows.Forms.RichTextBox();
+            this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
-            this.updateBut = new System.Windows.Forms.Button();
-            tabControl1 = new System.Windows.Forms.TabControl();
-            tabControl1.SuspendLayout();
+            this.tabCtrl.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).BeginInit();
             this.bugUpdate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtblUpdate)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabCtrl
             // 
-            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            tabControl1.Controls.Add(this.tabPage1);
-            tabControl1.Controls.Add(this.tabPage2);
-            tabControl1.Controls.Add(this.bugUpdate);
-            tabControl1.Location = new System.Drawing.Point(2, 1);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(845, 393);
-            tabControl1.TabIndex = 0;
+            this.tabCtrl.Controls.Add(this.tabPage1);
+            this.tabCtrl.Controls.Add(this.tabPage2);
+            this.tabCtrl.Controls.Add(this.bugUpdate);
+            this.tabCtrl.Controls.Add(this.tabPage3);
+            this.tabCtrl.Location = new System.Drawing.Point(2, 1);
+            this.tabCtrl.Name = "tabCtrl";
+            this.tabCtrl.SelectedIndex = 0;
+            this.tabCtrl.Size = new System.Drawing.Size(845, 393);
+            this.tabCtrl.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -99,11 +111,12 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(837, 367);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Bugs";
+            this.tabPage1.Text = "Welcome";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.refresh);
             this.tabPage2.Controls.Add(this.clear);
             this.tabPage2.Controls.Add(this.dataGridBug);
             this.tabPage2.Controls.Add(this.addBtn);
@@ -128,9 +141,19 @@
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // refresh
+            // 
+            this.refresh.Location = new System.Drawing.Point(21, 311);
+            this.refresh.Name = "refresh";
+            this.refresh.Size = new System.Drawing.Size(144, 23);
+            this.refresh.TabIndex = 19;
+            this.refresh.Text = "Refresh Table";
+            this.refresh.UseVisualStyleBackColor = true;
+            this.refresh.Click += new System.EventHandler(this.refresh_Click);
+            // 
             // clear
             // 
-            this.clear.Location = new System.Drawing.Point(49, 313);
+            this.clear.Location = new System.Drawing.Point(49, 282);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(75, 23);
             this.clear.TabIndex = 18;
@@ -149,16 +172,7 @@
             this.dataGridBug.Name = "dataGridBug";
             this.dataGridBug.Size = new System.Drawing.Size(636, 201);
             this.dataGridBug.TabIndex = 16;
-            // 
-            // bugReportBindingSource
-            // 
-            this.bugReportBindingSource.DataMember = "bugReport";
-            this.bugReportBindingSource.DataSource = this.bugDBDataSet;
-            // 
-            // bugDBDataSet
-            // 
-            this.bugDBDataSet.DataSetName = "bugDBDataSet";
-            this.bugDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataGridBug.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBug_CellContentClick);
             // 
             // addBtn
             // 
@@ -277,8 +291,8 @@
             // 
             // bugUpdate
             // 
-            this.bugUpdate.Controls.Add(this.updateBut);
             this.bugUpdate.Controls.Add(this.solvedUpdate);
+            this.bugUpdate.Controls.Add(this.updateBut);
             this.bugUpdate.Controls.Add(this.label2);
             this.bugUpdate.Controls.Add(this.sourceUpdate);
             this.bugUpdate.Controls.Add(this.label8);
@@ -303,12 +317,22 @@
             // solvedUpdate
             // 
             this.solvedUpdate.AutoSize = true;
-            this.solvedUpdate.Location = new System.Drawing.Point(224, 275);
+            this.solvedUpdate.Location = new System.Drawing.Point(222, 275);
             this.solvedUpdate.Name = "solvedUpdate";
             this.solvedUpdate.Size = new System.Drawing.Size(59, 17);
-            this.solvedUpdate.TabIndex = 32;
+            this.solvedUpdate.TabIndex = 34;
             this.solvedUpdate.Text = "Solved";
             this.solvedUpdate.UseVisualStyleBackColor = true;
+            // 
+            // updateBut
+            // 
+            this.updateBut.Location = new System.Drawing.Point(179, 298);
+            this.updateBut.Name = "updateBut";
+            this.updateBut.Size = new System.Drawing.Size(144, 25);
+            this.updateBut.TabIndex = 33;
+            this.updateBut.Text = "Update";
+            this.updateBut.UseVisualStyleBackColor = true;
+            this.updateBut.Click += new System.EventHandler(this.updateBut_Click);
             // 
             // label2
             // 
@@ -418,38 +442,135 @@
             this.dtblUpdate.Size = new System.Drawing.Size(824, 185);
             this.dtblUpdate.TabIndex = 17;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.submitBut);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.comment);
+            this.tabPage3.Controls.Add(this.fixerName);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.histText);
+            this.tabPage3.Controls.Add(this.codeText);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(837, 367);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Fix Code";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // submitBut
+            // 
+            this.submitBut.Location = new System.Drawing.Point(135, 331);
+            this.submitBut.Name = "submitBut";
+            this.submitBut.Size = new System.Drawing.Size(75, 23);
+            this.submitBut.TabIndex = 8;
+            this.submitBut.Text = "Submit";
+            this.submitBut.UseVisualStyleBackColor = true;
+            this.submitBut.Click += new System.EventHandler(this.submitBut_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(132, 289);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(78, 13);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Audit Comment";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 240);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Fixer Id";
+            // 
+            // comment
+            // 
+            this.comment.Location = new System.Drawing.Point(95, 305);
+            this.comment.Name = "comment";
+            this.comment.Size = new System.Drawing.Size(152, 20);
+            this.comment.TabIndex = 5;
+            // 
+            // fixerName
+            // 
+            this.fixerName.Location = new System.Drawing.Point(95, 256);
+            this.fixerName.Name = "fixerName";
+            this.fixerName.Size = new System.Drawing.Size(152, 20);
+            this.fixerName.TabIndex = 4;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(158, 19);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(66, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Audit History";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(626, 20);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Code";
+            // 
+            // histText
+            // 
+            this.histText.Location = new System.Drawing.Point(3, 35);
+            this.histText.Name = "histText";
+            this.histText.Size = new System.Drawing.Size(376, 189);
+            this.histText.TabIndex = 1;
+            this.histText.Text = "";
+            // 
+            // codeText
+            // 
+            this.codeText.Location = new System.Drawing.Point(464, 35);
+            this.codeText.Name = "codeText";
+            this.codeText.Size = new System.Drawing.Size(366, 315);
+            this.codeText.TabIndex = 0;
+            this.codeText.Text = "";
+            // 
+            // bugReportBindingSource
+            // 
+            this.bugReportBindingSource.DataMember = "bugReport";
+            this.bugReportBindingSource.DataSource = this.bugDBDataSet;
+            // 
+            // bugDBDataSet
+            // 
+            this.bugDBDataSet.DataSetName = "bugDBDataSet";
+            this.bugDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // bugReportTableAdapter
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
-            // 
-            // updateBut
-            // 
-            this.updateBut.Location = new System.Drawing.Point(208, 315);
-            this.updateBut.Name = "updateBut";
-            this.updateBut.Size = new System.Drawing.Size(75, 25);
-            this.updateBut.TabIndex = 33;
-            this.updateBut.Text = "Update";
-            this.updateBut.UseVisualStyleBackColor = true;
-            this.updateBut.Click += new System.EventHandler(this.updateBut_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 398);
-            this.Controls.Add(tabControl1);
+            this.Controls.Add(this.tabCtrl);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            tabControl1.ResumeLayout(false);
+            this.tabCtrl.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).EndInit();
             this.bugUpdate.ResumeLayout(false);
             this.bugUpdate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtblUpdate)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -478,7 +599,6 @@
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.TabPage bugUpdate;
         private System.Windows.Forms.DataGridView dtblUpdate;
-        private System.Windows.Forms.CheckBox solvedUpdate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox sourceUpdate;
         private System.Windows.Forms.Label label8;
@@ -492,6 +612,19 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox authorUpdate;
         private System.Windows.Forms.Button updateBut;
+        private System.Windows.Forms.CheckBox solvedUpdate;
+        private System.Windows.Forms.Button refresh;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.RichTextBox codeText;
+        private System.Windows.Forms.Button submitBut;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox comment;
+        private System.Windows.Forms.TextBox fixerName;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox histText;
+        private System.Windows.Forms.TabControl tabCtrl;
     }
 }
 
