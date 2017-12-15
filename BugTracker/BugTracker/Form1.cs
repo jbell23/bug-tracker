@@ -10,7 +10,6 @@ namespace BugTracker
 {
     public partial class Form1 : Form
     {
-
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30";
         
         //SqlConnection mySqlConnection;
@@ -25,11 +24,14 @@ namespace BugTracker
 
         public Form1()
         {
+
             String[] Data = new String[100];
 
             InitializeComponent();
             //populateListBox();
             populatedataGridBug();
+            this.Text = "Leeds Bug Tracker";
+
 
             //dataGridBug.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridBug_RowHeaderMouseDoubleClick);
             dtblUpdate.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dtblUpdate_RowHeaderMouseClick);
@@ -54,7 +56,7 @@ namespace BugTracker
 
         public void cleartxtBoxes()
         {
-            authorInput.Text = projectInput.Text = methodInput.Text = classInput.Text = sourceInput.Text = errorInput.Text = "";
+            authorInput.Text = projectInput.Text = methodInput.Text = classInput.Text = sourceInput.Text = errorInput.Text = codeInput.Text = "";
         }
 
         public bool checkInputs()
@@ -66,7 +68,8 @@ namespace BugTracker
                 string.IsNullOrEmpty(methodInput.Text) ||
                 string.IsNullOrEmpty(classInput.Text) ||
                 string.IsNullOrEmpty(sourceInput.Text) ||
-                string.IsNullOrEmpty(errorInput.Text))
+                string.IsNullOrEmpty(errorInput.Text) ||
+                string.IsNullOrEmpty(codeInput.Text))
             {
                 MessageBox.Show("Error - Inputs Incorrect");
                 rtnvalue = false;
@@ -75,7 +78,7 @@ namespace BugTracker
             return (rtnvalue);
         }
 
-        public void insertRecord(String author, String project, String method, String Class, String source_file, String error_line, String commandString)
+        public void insertRecord(String author, String project, String method, String Class, String source_file, String error_line, String code, String commandString)
         {
             using (SqlConnection myCon = new SqlConnection(connectionString))
             {
@@ -91,6 +94,7 @@ namespace BugTracker
                     bugInsert.Parameters.AddWithValue("@Class", Class);
                     bugInsert.Parameters.AddWithValue("@source_file", source_file);
                     bugInsert.Parameters.AddWithValue("@error_line", error_line);
+                    bugInsert.Parameters.AddWithValue("@code", code);
                     bugInsert.ExecuteNonQuery();
 
                 }
@@ -117,9 +121,9 @@ namespace BugTracker
 
                 mySqlConnection.Open();
 
-                String commandString = "INSERT INTO bugReport(author, project, method, Class, source_file, error_line) VALUES (@author, @project, @method, @Class, @source_file, @error_line)";
+                String commandString = "INSERT INTO bugReport(author, project, method, Class, source_file, error_line, code) VALUES (@author, @project, @method, @Class, @source_file, @error_line, @code)";
 
-                insertRecord(authorInput.Text, projectInput.Text, methodInput.Text, classInput.Text, sourceInput.Text, errorInput.Text, commandString);
+                insertRecord(authorInput.Text, projectInput.Text, methodInput.Text, classInput.Text, sourceInput.Text, errorInput.Text, codeInput.Text, commandString);
 
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
