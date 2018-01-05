@@ -1,6 +1,6 @@
 ﻿namespace BugTracker
 {
-    partial class login
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
-            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
+            this.loginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
             // 
             // label1
             // 
@@ -88,7 +88,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Bypass";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label3
             // 
@@ -115,7 +115,7 @@
             this.Controls.Add(this.userName);
             this.Name = "login";
             this.Text = "login";
-            this.Load += new System.EventHandler(this.login_Load);
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

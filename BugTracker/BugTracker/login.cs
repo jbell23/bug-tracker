@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace BugTracker
 {
-    public partial class login : Form
+    public partial class Login : Form
     {
-        public login()
+        public Login()
         {
             InitializeComponent();
             this.Text = "Login Form";
@@ -22,12 +22,12 @@ namespace BugTracker
 
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30";
 
-        private void login_Load(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void loginBtn_Click(object sender, EventArgs e)
+        private void LoginBtn_Click(object sender, EventArgs e)
         {
             if (userName.Text == "" || password.Text == "")
             {
@@ -70,7 +70,7 @@ namespace BugTracker
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
             form.Show();

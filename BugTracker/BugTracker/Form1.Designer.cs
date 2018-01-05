@@ -32,6 +32,8 @@
             this.tabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.codeInput = new System.Windows.Forms.RichTextBox();
             this.refresh = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
             this.dataGridBug = new System.Windows.Forms.DataGridView();
@@ -77,7 +79,8 @@
             this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
-            this.codeInput = new System.Windows.Forms.RichTextBox();
+            this.bugid_text = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabCtrl.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
@@ -109,13 +112,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(837, 367);
+            this.tabPage1.Size = new System.Drawing.Size(1132, 531);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Welcome";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.codeInput);
             this.tabPage2.Controls.Add(this.refresh);
             this.tabPage2.Controls.Add(this.clear);
@@ -141,6 +145,23 @@
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(236, 306);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "Code";
+            // 
+            // codeInput
+            // 
+            this.codeInput.Location = new System.Drawing.Point(35, 322);
+            this.codeInput.Name = "codeInput";
+            this.codeInput.Size = new System.Drawing.Size(478, 203);
+            this.codeInput.TabIndex = 20;
+            this.codeInput.Text = "";
+            // 
             // refresh
             // 
             this.refresh.Location = new System.Drawing.Point(751, 423);
@@ -149,7 +170,7 @@
             this.refresh.TabIndex = 19;
             this.refresh.Text = "Refresh Table";
             this.refresh.UseVisualStyleBackColor = true;
-            this.refresh.Click += new System.EventHandler(this.refresh_Click);
+            this.refresh.Click += new System.EventHandler(this.Refresh_Click);
             // 
             // clear
             // 
@@ -159,7 +180,7 @@
             this.clear.TabIndex = 18;
             this.clear.Text = "Clear";
             this.clear.UseVisualStyleBackColor = true;
-            this.clear.Click += new System.EventHandler(this.clear_Click);
+            this.clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // dataGridBug
             // 
@@ -172,7 +193,7 @@
             this.dataGridBug.Name = "dataGridBug";
             this.dataGridBug.Size = new System.Drawing.Size(1119, 198);
             this.dataGridBug.TabIndex = 16;
-            this.dataGridBug.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBug_CellContentClick);
+            this.dataGridBug.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridBug_CellContentClick);
             // 
             // addBtn
             // 
@@ -182,7 +203,7 @@
             this.addBtn.TabIndex = 14;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            this.addBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // label7
             // 
@@ -323,7 +344,7 @@
             this.updateBut.TabIndex = 33;
             this.updateBut.Text = "Update";
             this.updateBut.UseVisualStyleBackColor = true;
-            this.updateBut.Click += new System.EventHandler(this.updateBut_Click);
+            this.updateBut.Click += new System.EventHandler(this.UpdateBut_Click);
             // 
             // label2
             // 
@@ -435,6 +456,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.bugid_text);
             this.tabPage3.Controls.Add(this.submitBut);
             this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.label15);
@@ -454,18 +477,18 @@
             // 
             // submitBut
             // 
-            this.submitBut.Location = new System.Drawing.Point(141, 363);
+            this.submitBut.Location = new System.Drawing.Point(141, 394);
             this.submitBut.Name = "submitBut";
             this.submitBut.Size = new System.Drawing.Size(75, 23);
             this.submitBut.TabIndex = 8;
             this.submitBut.Text = "Submit";
             this.submitBut.UseVisualStyleBackColor = true;
-            this.submitBut.Click += new System.EventHandler(this.submitBut_Click);
+            this.submitBut.Click += new System.EventHandler(this.SubmitBut_Click);
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(147, 289);
+            this.label16.Location = new System.Drawing.Point(147, 320);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(78, 13);
             this.label16.TabIndex = 7;
@@ -474,7 +497,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(158, 248);
+            this.label15.Location = new System.Drawing.Point(158, 279);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 13);
             this.label15.TabIndex = 6;
@@ -482,7 +505,7 @@
             // 
             // comment
             // 
-            this.comment.Location = new System.Drawing.Point(61, 305);
+            this.comment.Location = new System.Drawing.Point(61, 336);
             this.comment.Multiline = true;
             this.comment.Name = "comment";
             this.comment.Size = new System.Drawing.Size(245, 52);
@@ -490,7 +513,7 @@
             // 
             // fixerName
             // 
-            this.fixerName.Location = new System.Drawing.Point(106, 264);
+            this.fixerName.Location = new System.Drawing.Point(106, 295);
             this.fixerName.Name = "fixerName";
             this.fixerName.Size = new System.Drawing.Size(152, 20);
             this.fixerName.TabIndex = 4;
@@ -545,13 +568,21 @@
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
             // 
-            // codeInput
+            // bugid_text
             // 
-            this.codeInput.Location = new System.Drawing.Point(35, 298);
-            this.codeInput.Name = "codeInput";
-            this.codeInput.Size = new System.Drawing.Size(478, 212);
-            this.codeInput.TabIndex = 20;
-            this.codeInput.Text = "";
+            this.bugid_text.Location = new System.Drawing.Point(133, 256);
+            this.bugid_text.Name = "bugid_text";
+            this.bugid_text.Size = new System.Drawing.Size(100, 20);
+            this.bugid_text.TabIndex = 9;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(158, 240);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Bug id";
             // 
             // Form1
             // 
@@ -627,6 +658,9 @@
         private System.Windows.Forms.RichTextBox histText;
         private System.Windows.Forms.TabControl tabCtrl;
         private System.Windows.Forms.RichTextBox codeInput;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox bugid_text;
     }
 }
 
