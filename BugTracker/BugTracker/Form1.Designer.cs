@@ -67,6 +67,8 @@
             this.authorUpdate = new System.Windows.Forms.TextBox();
             this.dtblUpdate = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.bugid_text = new System.Windows.Forms.TextBox();
             this.submitBut = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -74,13 +76,11 @@
             this.fixerName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.histText = new System.Windows.Forms.RichTextBox();
             this.codeText = new System.Windows.Forms.RichTextBox();
             this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
-            this.bugid_text = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.auditHist = new System.Windows.Forms.DataGridView();
             this.tabCtrl.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
@@ -89,6 +89,7 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).BeginInit();
             this.SuspendLayout();
             // 
             // tabCtrl
@@ -456,6 +457,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.auditHist);
             this.tabPage3.Controls.Add(this.label18);
             this.tabPage3.Controls.Add(this.bugid_text);
             this.tabPage3.Controls.Add(this.submitBut);
@@ -465,7 +467,6 @@
             this.tabPage3.Controls.Add(this.fixerName);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.histText);
             this.tabPage3.Controls.Add(this.codeText);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -474,6 +475,22 @@
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Fix Code";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(158, 240);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Bug id";
+            // 
+            // bugid_text
+            // 
+            this.bugid_text.Location = new System.Drawing.Point(133, 256);
+            this.bugid_text.Name = "bugid_text";
+            this.bugid_text.Size = new System.Drawing.Size(100, 20);
+            this.bugid_text.TabIndex = 9;
             // 
             // submitBut
             // 
@@ -538,14 +555,6 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Code";
             // 
-            // histText
-            // 
-            this.histText.Location = new System.Drawing.Point(3, 35);
-            this.histText.Name = "histText";
-            this.histText.Size = new System.Drawing.Size(376, 189);
-            this.histText.TabIndex = 1;
-            this.histText.Text = "";
-            // 
             // codeText
             // 
             this.codeText.Location = new System.Drawing.Point(404, 35);
@@ -568,21 +577,13 @@
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
             // 
-            // bugid_text
+            // auditHist
             // 
-            this.bugid_text.Location = new System.Drawing.Point(133, 256);
-            this.bugid_text.Name = "bugid_text";
-            this.bugid_text.Size = new System.Drawing.Size(100, 20);
-            this.bugid_text.TabIndex = 9;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(158, 240);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 13);
-            this.label18.TabIndex = 10;
-            this.label18.Text = "Bug id";
+            this.auditHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.auditHist.Location = new System.Drawing.Point(42, 55);
+            this.auditHist.Name = "auditHist";
+            this.auditHist.Size = new System.Drawing.Size(240, 150);
+            this.auditHist.TabIndex = 11;
             // 
             // Form1
             // 
@@ -604,6 +605,7 @@
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -655,12 +657,12 @@
         private System.Windows.Forms.TextBox fixerName;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.RichTextBox histText;
         private System.Windows.Forms.TabControl tabCtrl;
         private System.Windows.Forms.RichTextBox codeInput;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox bugid_text;
+        private System.Windows.Forms.DataGridView auditHist;
     }
 }
 

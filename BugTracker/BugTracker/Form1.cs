@@ -17,6 +17,7 @@ namespace BugTracker
 
         DataTable dtbl = new DataTable();
         DataTable dtblUp = new DataTable();
+        DataTable auditDtbl = new DataTable();
 
         int ID = 0;
         string solved;
@@ -50,6 +51,7 @@ namespace BugTracker
 
                 dataGridBug.DataSource = dtbl;
                 dtblUpdate.DataSource = dtblUp;
+
             }
         }
 
@@ -104,7 +106,6 @@ namespace BugTracker
             }
 
         }
- 
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -149,12 +150,25 @@ namespace BugTracker
 
             if (e.RowIndex >= 0)
             {
+
                 int i;
                 i = dataGridBug.SelectedCells[0].RowIndex;
 
                 ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
                 codeText.Text = dataGridBug.Rows[e.RowIndex].Cells[9].Value.ToString();
+
+
+
+                SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+
+                mySqlConnection.Open();
+                SqlDataAdapter sqlDa2 = new SqlDataAdapter("SELECT * FROM Fixers WHERE id=@id", mySqlConnection);
+                sqlDa2.Fill(auditDtbl);
+                auditHist.DataSource = auditDtbl;
             }
+
+
         }
 
         public void UpdateRecord (String author, String project, String method, String Class, String source_file, String error_line, String solved, String commandString)
@@ -230,7 +244,6 @@ namespace BugTracker
                     upCmd.Parameters.AddWithValue("@fixer_id", fixerName.Text);
                     upCmd.Parameters.AddWithValue("@audit_comment", comment.Text);
                     upCmd.Parameters.AddWithValue("@code", codeText.Text);
-                    //upCmd.Parameters.AddWithValue("@id", bugid_text.Text);
                     upCmd.ExecuteNonQuery();
                     MessageBox.Show("succesful");
                     CleartxtBoxes();
