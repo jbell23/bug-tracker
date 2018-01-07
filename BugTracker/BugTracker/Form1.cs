@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using ColorCode;
 
 namespace BugTracker
 {
@@ -13,6 +14,7 @@ namespace BugTracker
     /// </summary>
     public partial class Form1 : Form
     {
+        
         //Setting up connections to the database
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30";
         SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
@@ -25,6 +27,7 @@ namespace BugTracker
         int ID = 0;
         string solved;
 
+
         /// <summary>
         /// Initialising the form and using the populategridbug function.
         /// </summary>
@@ -35,6 +38,33 @@ namespace BugTracker
             this.Text = "Leeds Bug Tracker";
 
             dtblUpdate.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(DtblUpdate_RowHeaderMouseClick);
+
+            // Add the keywords to the list.
+            Syntax_test.Settings.Keywords.Add("function");
+            Syntax_test.Settings.Keywords.Add("if");
+            Syntax_test.Settings.Keywords.Add("then");
+            Syntax_test.Settings.Keywords.Add("else");
+            Syntax_test.Settings.Keywords.Add("elseif");
+            Syntax_test.Settings.Keywords.Add("end");
+
+            // Set the comment identifier. 
+            // For Lua this is two minus-signs after each other (--).
+            // For C++ code we would set this property to "//".
+            Syntax_test.Settings.Comment = "--";
+
+            // Set the colors that will be used.
+            Syntax_test.Settings.KeywordColor = Color.Blue;
+            Syntax_test.Settings.CommentColor = Color.Green;
+            Syntax_test.Settings.StringColor = Color.Gray;
+            Syntax_test.Settings.IntegerColor = Color.Red;
+
+            // Let's not process strings and integers.
+            Syntax_test.Settings.EnableStrings = false;
+            Syntax_test.Settings.EnableIntegers = false;
+
+            // Let's make the settings we just set valid by compiling
+            // the keywords to a regular expression.
+            Syntax_test.CompileKeywords();
         }
 
         /// <summary>
@@ -378,6 +408,11 @@ namespace BugTracker
                 sqlDa.Fill(dtblUp);
                 CleartxtBoxes();
             }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -20,3 +20,6 @@ C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\Bug
 C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
 C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\obj\Debug\BugTracker.login.resources
 C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\BugTracker.xml
+C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\ColorCode.dll
+C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\SyntaxHighlighter.dll
+C:\Users\jbell\Desktop\Git - Bug\bug-tracker\BugTracker\BugTracker\bin\Debug\SyntaxHighlighter.pdb

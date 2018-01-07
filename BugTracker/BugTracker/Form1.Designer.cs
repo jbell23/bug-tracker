@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.Syntax_test = new SyntaxHighlighter.SyntaxRichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.codeInput = new System.Windows.Forms.RichTextBox();
@@ -67,9 +69,9 @@
             this.authorUpdate = new System.Windows.Forms.TextBox();
             this.dtblUpdate = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.codeText = new SyntaxHighlighter.SyntaxRichTextBox();
+            this.audit_solved = new System.Windows.Forms.CheckBox();
             this.auditHist = new System.Windows.Forms.DataGridView();
-            this.label18 = new System.Windows.Forms.Label();
-            this.bugid_text = new System.Windows.Forms.TextBox();
             this.submitBut = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -77,12 +79,11 @@
             this.fixerName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.codeText = new System.Windows.Forms.RichTextBox();
             this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
-            this.audit_solved = new System.Windows.Forms.CheckBox();
             this.tabCtrl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
             this.bugUpdate.SuspendLayout();
@@ -111,6 +112,8 @@
             // tabPage1
             // 
             this.tabPage1.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.Syntax_test);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -118,6 +121,23 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Welcome";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(550, 189);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
+            // Syntax_test
+            // 
+            this.Syntax_test.Location = new System.Drawing.Point(223, 157);
+            this.Syntax_test.Name = "Syntax_test";
+            this.Syntax_test.Size = new System.Drawing.Size(100, 96);
+            this.Syntax_test.TabIndex = 0;
+            this.Syntax_test.Text = "";
             // 
             // tabPage2
             // 
@@ -458,10 +478,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.codeText);
             this.tabPage3.Controls.Add(this.audit_solved);
             this.tabPage3.Controls.Add(this.auditHist);
-            this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.bugid_text);
             this.tabPage3.Controls.Add(this.submitBut);
             this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.label15);
@@ -469,7 +488,6 @@
             this.tabPage3.Controls.Add(this.fixerName);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.codeText);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -478,6 +496,24 @@
             this.tabPage3.Text = "Fix Code";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // codeText
+            // 
+            this.codeText.Location = new System.Drawing.Point(597, 126);
+            this.codeText.Name = "codeText";
+            this.codeText.Size = new System.Drawing.Size(321, 189);
+            this.codeText.TabIndex = 36;
+            this.codeText.Text = "";
+            // 
+            // audit_solved
+            // 
+            this.audit_solved.AutoSize = true;
+            this.audit_solved.Location = new System.Drawing.Point(150, 394);
+            this.audit_solved.Name = "audit_solved";
+            this.audit_solved.Size = new System.Drawing.Size(59, 17);
+            this.audit_solved.TabIndex = 35;
+            this.audit_solved.Text = "Solved";
+            this.audit_solved.UseVisualStyleBackColor = true;
+            // 
             // auditHist
             // 
             this.auditHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -485,22 +521,6 @@
             this.auditHist.Name = "auditHist";
             this.auditHist.Size = new System.Drawing.Size(240, 150);
             this.auditHist.TabIndex = 11;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(158, 240);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 13);
-            this.label18.TabIndex = 10;
-            this.label18.Text = "Bug id";
-            // 
-            // bugid_text
-            // 
-            this.bugid_text.Location = new System.Drawing.Point(133, 256);
-            this.bugid_text.Name = "bugid_text";
-            this.bugid_text.Size = new System.Drawing.Size(100, 20);
-            this.bugid_text.TabIndex = 9;
             // 
             // submitBut
             // 
@@ -565,14 +585,6 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Code";
             // 
-            // codeText
-            // 
-            this.codeText.Location = new System.Drawing.Point(404, 35);
-            this.codeText.Name = "codeText";
-            this.codeText.Size = new System.Drawing.Size(721, 315);
-            this.codeText.TabIndex = 0;
-            this.codeText.Text = "";
-            // 
             // bugReportBindingSource
             // 
             this.bugReportBindingSource.DataMember = "bugReport";
@@ -587,16 +599,6 @@
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
             // 
-            // audit_solved
-            // 
-            this.audit_solved.AutoSize = true;
-            this.audit_solved.Location = new System.Drawing.Point(150, 394);
-            this.audit_solved.Name = "audit_solved";
-            this.audit_solved.Size = new System.Drawing.Size(59, 17);
-            this.audit_solved.TabIndex = 35;
-            this.audit_solved.Text = "Solved";
-            this.audit_solved.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -607,6 +609,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabCtrl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).EndInit();
@@ -661,7 +664,6 @@
         private System.Windows.Forms.CheckBox solvedUpdate;
         private System.Windows.Forms.Button refresh;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.RichTextBox codeText;
         private System.Windows.Forms.Button submitBut;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
@@ -672,10 +674,11 @@
         private System.Windows.Forms.TabControl tabCtrl;
         private System.Windows.Forms.RichTextBox codeInput;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox bugid_text;
         private System.Windows.Forms.DataGridView auditHist;
         private System.Windows.Forms.CheckBox audit_solved;
+        private SyntaxHighlighter.SyntaxRichTextBox Syntax_test;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private SyntaxHighlighter.SyntaxRichTextBox codeText;
     }
 }
 
