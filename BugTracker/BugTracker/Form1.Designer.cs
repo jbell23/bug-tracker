@@ -67,6 +67,7 @@
             this.authorUpdate = new System.Windows.Forms.TextBox();
             this.dtblUpdate = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.auditHist = new System.Windows.Forms.DataGridView();
             this.label18 = new System.Windows.Forms.Label();
             this.bugid_text = new System.Windows.Forms.TextBox();
             this.submitBut = new System.Windows.Forms.Button();
@@ -80,16 +81,16 @@
             this.bugReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
-            this.auditHist = new System.Windows.Forms.DataGridView();
+            this.audit_solved = new System.Windows.Forms.CheckBox();
             this.tabCtrl.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBug)).BeginInit();
             this.bugUpdate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtblUpdate)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).BeginInit();
             this.SuspendLayout();
             // 
             // tabCtrl
@@ -457,6 +458,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.audit_solved);
             this.tabPage3.Controls.Add(this.auditHist);
             this.tabPage3.Controls.Add(this.label18);
             this.tabPage3.Controls.Add(this.bugid_text);
@@ -476,6 +478,14 @@
             this.tabPage3.Text = "Fix Code";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // auditHist
+            // 
+            this.auditHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.auditHist.Location = new System.Drawing.Point(42, 55);
+            this.auditHist.Name = "auditHist";
+            this.auditHist.Size = new System.Drawing.Size(240, 150);
+            this.auditHist.TabIndex = 11;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -494,7 +504,7 @@
             // 
             // submitBut
             // 
-            this.submitBut.Location = new System.Drawing.Point(141, 394);
+            this.submitBut.Location = new System.Drawing.Point(134, 427);
             this.submitBut.Name = "submitBut";
             this.submitBut.Size = new System.Drawing.Size(75, 23);
             this.submitBut.TabIndex = 8;
@@ -577,13 +587,15 @@
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
             // 
-            // auditHist
+            // audit_solved
             // 
-            this.auditHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.auditHist.Location = new System.Drawing.Point(42, 55);
-            this.auditHist.Name = "auditHist";
-            this.auditHist.Size = new System.Drawing.Size(240, 150);
-            this.auditHist.TabIndex = 11;
+            this.audit_solved.AutoSize = true;
+            this.audit_solved.Location = new System.Drawing.Point(150, 394);
+            this.audit_solved.Name = "audit_solved";
+            this.audit_solved.Size = new System.Drawing.Size(59, 17);
+            this.audit_solved.TabIndex = 35;
+            this.audit_solved.Text = "Solved";
+            this.audit_solved.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -603,9 +615,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtblUpdate)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugReportBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bugDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditHist)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -663,6 +675,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox bugid_text;
         private System.Windows.Forms.DataGridView auditHist;
+        private System.Windows.Forms.CheckBox audit_solved;
     }
 }
 

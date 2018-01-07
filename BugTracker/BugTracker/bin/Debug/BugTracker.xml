@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BugTracker</name>
+    </assembly>
+    <members>
+        <member name="T:BugTracker.bugDBDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSet.bugReportDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSet.bugReportRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSet.bugReportRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(BugTracker.bugDBDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(BugTracker.bugDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(BugTracker.bugDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.UpdateAll(BugTracker.bugDBDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:BugTracker.bugDBDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:BugTracker.Form1">
+            <summary>
+            This class sets up the connection strings, DataTables and two variables ('ID', 'solved').
+            </summary>
+        </member>
+        <member name="M:BugTracker.Form1.#ctor">
+            <summary>
+            Initialising the form and using the populategridbug function.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Form1.PopulatedataGridBug">
+            <summary>
+            This class creates an sql data adapter and uses the data to fill up the data tables which were initialised in the previous section.
+            These data sources are then used to fill the tables within the program.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Form1.CleartxtBoxes">
+            <summary>
+            This function is used to clear textboxes after the user has filled out a form. 
+            This function is called on the button click to empty those text boxes.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Form1.CheckInputs">
+            <summary>
+            This method checks whether the inputs which the user has submitted are null or empty.
+            </summary>
+            <returns>If empty return error messagebox.</returns>
+        </member>
+        <member name="M:BugTracker.Form1.InsertRecord(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method takes all the values inputted by the user and associats them with the corresponding database table field.
+            If there is an error with the data a messagebox will pop up and display the error.
+            </summary>
+            <param name="author">Used to refer to field in table.</param>
+            <param name="project">Used to refer to field in table.</param>
+            <param name="method">Used to refer to field in table.</param>
+            <param name="Class">Used to refer to field in table.</param>
+            <param name="source_file">Used to refer to field in table.</param>
+            <param name="error_line">Used to refer to field in table.</param>
+            <param name="code">Used to refer to field in table.</param>
+            <param name="commandString"></param>
+        </member>
+        <member name="M:BugTracker.Form1.AddBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            When add button is clicked, use checkinputs function then run commandString to insert the inputted data into the table.
+            The DataTable is then cleared and repopulated with the new data.
+            </summary>
+            <param name="sender">Sends data from the object to the event handler.</param>
+            <param name="e">Accept event argument.</param>
+        </member>
+        <member name="M:BugTracker.Form1.DtblUpdate_RowHeaderMouseClick(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)">
+            <summary>
+            When a row header is clicked it moves all the associated data into textfields.
+            This allows the user to be able to edit the information within.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BugTracker.Form1.DataGridBug_CellContentClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            When the cell content is clicked in the data table, it moves the user to the third tab and displays the associated fields code into a rich textbox.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BugTracker.Form1.UpdateRecord(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Declaring the checkbox value. Associating the text boxes with database fields. If the function executes correctly a success messagebox will show.
+            If not a messagebox containing the corresponding error will be displayed.
+            </summary>
+            <param name="author">Used to refer to field in table.</param>
+            <param name="project">Used to refer to field in table.</param>
+            <param name="method">Used to refer to field in table.</param>
+            <param name="Class">Used to refer to field in table.</param>
+            <param name="source_file">Used to refer to field in table.</param>
+            <param name="error_line">Used to refer to field in table.</param>
+            <param name="solved">Used to refer to field in table.</param>
+            <param name="commandString"></param>
+        </member>
+        <member name="M:BugTracker.Form1.UpdateBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            When update button is clicked, make sure all fields have been then run commandString to insert the updated data into the table.
+            The DataTable is then cleared and repopulated with the updated data.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BugTracker.Form1.UpdateCode(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method takes the user inputted values from the text boxes and adds them to String parameters.
+            The query is then executed and textboxes are cleared.
+            If the query is unsucesful in any way the user is show an error messagebox.
+            </summary>
+            <param name="code">Used to refer to associated field in table.</param>
+            <param name="fixer_id">Used to refer to associated field in table.</param>
+            <param name="audit_comment">Used to refer to associated field in table.</param>
+            <param name="fixer_id_report">Used to refer to associated field in table.</param>
+            <param name="solved">Used to refer to associated field in table.</param>
+            <param name="commandString"></param>
+        </member>
+        <member name="M:BugTracker.Form1.Clear_Click(System.Object,System.EventArgs)">
+            <summary>
+            When clear button is clicked all textboxes will be cleared of any input.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BugTracker.Form1.Refresh_Click(System.Object,System.EventArgs)">
+            <summary>
+            When the refresh button is clicked this function is triggered, it then reloads the database data into the datatable.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BugTracker.Form1.SubmitBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            This function is used to add data to two different tables according to the users inputs.
+            The bugReport table will have certain fields updated and the fixers table will be given a new entry.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:BugTracker.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BugTracker.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BugTracker.Login.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Login.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BugTracker.Login.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:BugTracker.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:BugTracker.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:BugTracker.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:BugTracker.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
