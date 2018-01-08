@@ -39,32 +39,6 @@ namespace BugTracker
 
             dtblUpdate.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(DtblUpdate_RowHeaderMouseClick);
 
-            // Add the keywords to the list.
-            Syntax_test.Settings.Keywords.Add("function");
-            Syntax_test.Settings.Keywords.Add("if");
-            Syntax_test.Settings.Keywords.Add("then");
-            Syntax_test.Settings.Keywords.Add("else");
-            Syntax_test.Settings.Keywords.Add("elseif");
-            Syntax_test.Settings.Keywords.Add("end");
-
-            // Set the comment identifier. 
-            // For Lua this is two minus-signs after each other (--).
-            // For C++ code we would set this property to "//".
-            Syntax_test.Settings.Comment = "--";
-
-            // Set the colors that will be used.
-            Syntax_test.Settings.KeywordColor = Color.Blue;
-            Syntax_test.Settings.CommentColor = Color.Green;
-            Syntax_test.Settings.StringColor = Color.Gray;
-            Syntax_test.Settings.IntegerColor = Color.Red;
-
-            // Let's not process strings and integers.
-            Syntax_test.Settings.EnableStrings = false;
-            Syntax_test.Settings.EnableIntegers = false;
-
-            // Let's make the settings we just set valid by compiling
-            // the keywords to a regular expression.
-            Syntax_test.CompileKeywords();
         }
 
         /// <summary>
@@ -95,6 +69,14 @@ namespace BugTracker
         public void CleartxtBoxes()
         {
             authorInput.Text = projectInput.Text = methodInput.Text = classInput.Text = sourceInput.Text = errorInput.Text = codeInput.Text = comment.Text = fixerName.Text = "";
+        }
+        /// <summary>
+        /// This function is used to clear textboxes after the user has filled out a form. 
+        /// This function is called on the button click to empty those text boxes.
+        /// </summary>
+        public void CleartxtBoxes2()
+        {
+            authorUpdate.Text = projectUpdate.Text = methodUpdate.Text = classUpdate.Text = sourceUpdate.Text = errorUpdate.Text = codeInput.Text = comment.Text = fixerName.Text = "";
         }
         /// <summary>
         /// This method checks whether the inputs which the user has submitted are null or empty.
@@ -227,6 +209,13 @@ namespace BugTracker
                 ID = Convert.ToInt16(dataGridBug.Rows[e.RowIndex].Cells[0].Value.ToString());
                 codeText.Text = dataGridBug.Rows[e.RowIndex].Cells[9].Value.ToString();
 
+                SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
+
+
+                mySqlConnection.Open();
+                SqlDataAdapter sqlDa2 = new SqlDataAdapter("SELECT * FROM Fixers WHERE id=ID", mySqlConnection);
+                sqlDa2.Fill(auditDtbl);
+                auditHist.DataSource = auditDtbl;
             }
 
 
@@ -248,7 +237,7 @@ namespace BugTracker
             //If checkbox is checked/un-checked give the string solved a different value.
             if (solvedUpdate.Checked)
             {
-                solved = "Solved";
+                solved = "Completed";
             }
             else
             {
@@ -321,7 +310,7 @@ namespace BugTracker
         {
             if (audit_solved.Checked)
             {
-                solved = "Solved";
+                solved = "Completed";
             }
             else
             {
@@ -344,7 +333,6 @@ namespace BugTracker
                     upCmd.ExecuteNonQuery();
                     MessageBox.Show("succesful");
                     CleartxtBoxes();
-
 
                     myCon.Close();
                 }
@@ -401,7 +389,7 @@ namespace BugTracker
                 String commandString = "UPDATE bugReport SET fixer_id_report=@fixer_id_report, solved=@solved, code=@code WHERE id=@id; INSERT INTO Fixers(fixer_id,audit_comment,code,id) VALUES (@fixer_id, @audit_comment, @code,@id)";
 
                 UpdateCode(fixerName.Text, codeText.Text, comment.Text, fixerName.Text, solved, commandString);
-
+                
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
                 dtblUp.Clear();
@@ -410,9 +398,16 @@ namespace BugTracker
             }
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void searchData_TextChanged(object sender, EventArgs e)
         {
+            DataView dataSearch = new DataView(dtbl);
+            dataSearch.RowFilter = string.Format("project LIKE '%{0}%'", searchData.Text);
+            dataGridBug.DataSource = dataSearch;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CleartxtBoxes2();
         }
     }
 }
