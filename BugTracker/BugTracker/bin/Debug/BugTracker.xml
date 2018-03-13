@@ -91,6 +91,12 @@
             This function is called on the button click to empty those text boxes.
             </summary>
         </member>
+        <member name="M:BugTracker.Form1.CleartxtBoxes2">
+            <summary>
+            This function is used to clear textboxes after the user has filled out a form. 
+            This function is called on the button click to empty those text boxes.
+            </summary>
+        </member>
         <member name="M:BugTracker.Form1.CheckInputs">
             <summary>
             This method checks whether the inputs which the user has submitted are null or empty.

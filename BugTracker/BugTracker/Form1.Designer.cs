@@ -34,10 +34,10 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.searchData = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.codeInput = new System.Windows.Forms.RichTextBox();
             this.refresh = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
             this.dataGridBug = new System.Windows.Forms.DataGridView();
@@ -55,6 +55,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.authorInput = new System.Windows.Forms.TextBox();
             this.bugUpdate = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.solvedUpdate = new System.Windows.Forms.CheckBox();
             this.updateBut = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -85,9 +87,8 @@
             this.bugDBDataSet = new BugTracker.bugDBDataSet();
             this.bugReportTableAdapter = new BugTracker.bugDBDataSetTableAdapters.bugReportTableAdapter();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.codeInput = new SyntaxHighlighter.SyntaxRichTextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.tabCtrl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -150,11 +151,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Controls.Add(this.codeInput);
             this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.searchData);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.codeInput);
             this.tabPage2.Controls.Add(this.refresh);
             this.tabPage2.Controls.Add(this.clear);
             this.tabPage2.Controls.Add(this.dataGridBug);
@@ -178,6 +180,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Upload Bug";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(383, 14);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(373, 20);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "Double click on an author cell to attempt to fix a bug";
             // 
             // label19
             // 
@@ -205,14 +217,6 @@
             this.label17.Size = new System.Drawing.Size(44, 18);
             this.label17.TabIndex = 21;
             this.label17.Text = "Code";
-            // 
-            // codeInput
-            // 
-            this.codeInput.Location = new System.Drawing.Point(397, 271);
-            this.codeInput.Name = "codeInput";
-            this.codeInput.Size = new System.Drawing.Size(553, 254);
-            this.codeInput.TabIndex = 20;
-            this.codeInput.Text = "";
             // 
             // refresh
             // 
@@ -380,10 +384,30 @@
             this.bugUpdate.Text = "Update Bug";
             this.bugUpdate.UseVisualStyleBackColor = true;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(304, 15);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(480, 20);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "Select a row on the left hand side to be able to edit bug information";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(458, 405);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(153, 41);
+            this.button1.TabIndex = 35;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // solvedUpdate
             // 
             this.solvedUpdate.AutoSize = true;
-            this.solvedUpdate.Location = new System.Drawing.Point(215, 347);
+            this.solvedUpdate.Location = new System.Drawing.Point(510, 347);
             this.solvedUpdate.Name = "solvedUpdate";
             this.solvedUpdate.Size = new System.Drawing.Size(59, 17);
             this.solvedUpdate.TabIndex = 34;
@@ -392,7 +416,7 @@
             // 
             // updateBut
             // 
-            this.updateBut.Location = new System.Drawing.Point(172, 370);
+            this.updateBut.Location = new System.Drawing.Point(467, 370);
             this.updateBut.Name = "updateBut";
             this.updateBut.Size = new System.Drawing.Size(144, 29);
             this.updateBut.TabIndex = 33;
@@ -403,7 +427,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(375, 266);
+            this.label2.Location = new System.Drawing.Point(670, 266);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 29;
@@ -411,7 +435,7 @@
             // 
             // sourceUpdate
             // 
-            this.sourceUpdate.Location = new System.Drawing.Point(332, 282);
+            this.sourceUpdate.Location = new System.Drawing.Point(627, 282);
             this.sourceUpdate.Name = "sourceUpdate";
             this.sourceUpdate.Size = new System.Drawing.Size(144, 20);
             this.sourceUpdate.TabIndex = 28;
@@ -419,7 +443,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(375, 306);
+            this.label8.Location = new System.Drawing.Point(670, 306);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 27;
@@ -427,7 +451,7 @@
             // 
             // errorUpdate
             // 
-            this.errorUpdate.Location = new System.Drawing.Point(332, 322);
+            this.errorUpdate.Location = new System.Drawing.Point(627, 322);
             this.errorUpdate.Name = "errorUpdate";
             this.errorUpdate.Size = new System.Drawing.Size(144, 20);
             this.errorUpdate.TabIndex = 26;
@@ -435,7 +459,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(229, 305);
+            this.label9.Location = new System.Drawing.Point(524, 305);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 13);
             this.label9.TabIndex = 25;
@@ -443,7 +467,7 @@
             // 
             // classUpdate
             // 
-            this.classUpdate.Location = new System.Drawing.Point(172, 321);
+            this.classUpdate.Location = new System.Drawing.Point(467, 321);
             this.classUpdate.Name = "classUpdate";
             this.classUpdate.Size = new System.Drawing.Size(144, 20);
             this.classUpdate.TabIndex = 24;
@@ -451,7 +475,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(223, 266);
+            this.label10.Location = new System.Drawing.Point(518, 266);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(43, 13);
             this.label10.TabIndex = 23;
@@ -459,7 +483,7 @@
             // 
             // methodUpdate
             // 
-            this.methodUpdate.Location = new System.Drawing.Point(172, 282);
+            this.methodUpdate.Location = new System.Drawing.Point(467, 282);
             this.methodUpdate.Name = "methodUpdate";
             this.methodUpdate.Size = new System.Drawing.Size(144, 20);
             this.methodUpdate.TabIndex = 22;
@@ -467,7 +491,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(63, 305);
+            this.label11.Location = new System.Drawing.Point(358, 305);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(40, 13);
             this.label11.TabIndex = 21;
@@ -475,7 +499,7 @@
             // 
             // projectUpdate
             // 
-            this.projectUpdate.Location = new System.Drawing.Point(12, 321);
+            this.projectUpdate.Location = new System.Drawing.Point(307, 321);
             this.projectUpdate.Name = "projectUpdate";
             this.projectUpdate.Size = new System.Drawing.Size(144, 20);
             this.projectUpdate.TabIndex = 20;
@@ -483,7 +507,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(63, 266);
+            this.label12.Location = new System.Drawing.Point(358, 266);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
             this.label12.TabIndex = 19;
@@ -491,7 +515,7 @@
             // 
             // authorUpdate
             // 
-            this.authorUpdate.Location = new System.Drawing.Point(12, 282);
+            this.authorUpdate.Location = new System.Drawing.Point(307, 282);
             this.authorUpdate.Name = "authorUpdate";
             this.authorUpdate.Size = new System.Drawing.Size(144, 20);
             this.authorUpdate.TabIndex = 18;
@@ -631,35 +655,23 @@
             // 
             this.bugReportTableAdapter.ClearBeforeFill = true;
             // 
-            // button1
+            // codeInput
             // 
-            this.button1.Location = new System.Drawing.Point(163, 405);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 41);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.codeInput.Location = new System.Drawing.Point(435, 277);
+            this.codeInput.Name = "codeInput";
+            this.codeInput.Size = new System.Drawing.Size(483, 248);
+            this.codeInput.TabIndex = 24;
+            this.codeInput.Text = "";
             // 
-            // label20
+            // label23
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(383, 14);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(314, 20);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "Double click on a cell to attempt to fix a bug";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(304, 15);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(480, 20);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "Select a row on the left hand side to be able to edit bug information";
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(147, 293);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(110, 18);
+            this.label23.TabIndex = 25;
+            this.label23.Text = "Add A New Bug";
             // 
             // Form1
             // 
@@ -735,7 +747,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TabControl tabCtrl;
-        private System.Windows.Forms.RichTextBox codeInput;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.DataGridView auditHist;
         private System.Windows.Forms.CheckBox audit_solved;
@@ -748,6 +759,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label22;
+        private SyntaxHighlighter.SyntaxRichTextBox codeInput;
+        private System.Windows.Forms.Label label23;
     }
 }
 

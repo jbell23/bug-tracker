@@ -14,7 +14,7 @@ namespace BugTracker
     /// </summary>
     public partial class Form1 : Form
     {
-        
+
         //Setting up connections to the database
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30";
         SqlConnection mySqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jbell\Documents\bugDB.mdf;Integrated Security=True;MultipleActiveResultSets=true;Connect Timeout=30");
@@ -33,11 +33,39 @@ namespace BugTracker
         /// </summary>
         public Form1()
         {
+
+
             InitializeComponent();
             PopulatedataGridBug();
             this.Text = "Leeds Bug Tracker";
 
             dtblUpdate.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(DtblUpdate_RowHeaderMouseClick);
+
+            //Rich text box library
+            // Add the keywords to the list.
+            codeInput.Settings.Keywords.Add("function");
+            codeInput.Settings.Keywords.Add("if");
+            codeInput.Settings.Keywords.Add("then");
+            codeInput.Settings.Keywords.Add("else");
+            codeInput.Settings.Keywords.Add("elseif");
+            codeInput.Settings.Keywords.Add("end");
+
+            // Set the comment identifier. 
+            codeInput.Settings.Comment = "//";
+
+            // Set the colors that will be used.
+            codeInput.Settings.KeywordColor = Color.Blue;
+            codeInput.Settings.CommentColor = Color.Green;
+            codeInput.Settings.StringColor = Color.Gray;
+            codeInput.Settings.IntegerColor = Color.Red;
+
+            // Let's not process strings and integers.
+            codeInput.Settings.EnableStrings = false;
+            codeInput.Settings.EnableIntegers = false;
+
+            // Let's make the settings we just set valid by compiling
+            // the keywords to a regular expression.
+            codeInput.CompileKeywords();
 
         }
 
@@ -169,7 +197,6 @@ namespace BugTracker
                 dtbl.Clear();
                 sqlDa.Fill(dtbl);
                 CleartxtBoxes();
-
             }
         }
         /// <summary>
@@ -261,7 +288,7 @@ namespace BugTracker
                     upCmd.Parameters.AddWithValue("@error_line", errorUpdate.Text);
                     upCmd.Parameters.AddWithValue("@solved", solved);
                     upCmd.ExecuteNonQuery();
-                    MessageBox.Show("successful");
+                    MessageBox.Show("Successful");
 
                     myCon.Close();
                 }
@@ -370,7 +397,10 @@ namespace BugTracker
             SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM bugReport", mySqlConnection);
 
             dtbl.Clear();
+            dtblUp.Clear();
             sqlDa.Fill(dtbl);
+            sqlDa.Fill(dtblUp);
+
         }
         /// <summary>
         /// This function is used to add data to two different tables according to the users inputs.
@@ -400,7 +430,7 @@ namespace BugTracker
 
         private void searchData_TextChanged(object sender, EventArgs e)
         {
-            DataView dataSearch = new DataView(dtbl);
+            var dataSearch = new DataView(dtbl);
             dataSearch.RowFilter = string.Format("project LIKE '%{0}%'", searchData.Text);
             dataGridBug.DataSource = dataSearch;
         }

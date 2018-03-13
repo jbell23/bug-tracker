@@ -69,11 +69,5 @@ namespace BugTracker
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.Show();
-        }
     }
 }
